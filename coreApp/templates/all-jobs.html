@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Все вакансии{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="container">
+            <h1 class="mb-4">Все активные вакансии</h1>
+            {% for job in jobs %}
+            {% if job.isActive %}
+            <div class="all-jobs">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <img class="mb-3" src="{{ job.logo }}" width="72" height="72" alt="">
+                        <h3>{{ job.title }}</h3>
+                        <h4>{{ job.company }}</h4>
+                        <h5>{{ job.postDate }}</h5>
+                        <span class="badge rounded-pill text-bg-success">Активная вакансия</span>
+                        <p><b>Описание:</b> {{ job.description }}</p>
+                        <a href="{{ job.linkJob }}" target="_blank" class="btn btn-success">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="not-active-jobs">
+                <h2 class="mb-4">В архиве</h2>
+                    <div class="card-body">
+                        <img class="mb-3" src="{{ job.logo }}" width="72" height="72" alt="">
+                        <h3>{{ job.title }}</h3>
+                        <h4>{{ job.company }}</h4>
+                        <h5>{{ job.postDate }}</h5>
+                        <span class="badge rounded-pill text-bg-danger">В архиве</span>
+                        <p><b>Описание:</b> {{ job.description }}</p>
+                    </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

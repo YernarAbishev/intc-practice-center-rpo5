@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Все практики{% endblock %}
+
+{% block content %}
+    <div class="main">
+        <div class="container">
+            <h1 class="mb-4">Доступные компании для практики</h1>
+            {% for practice in practices %}
+            {% if practice.isActive %}
+            <div class="all-jobs">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <img class="mb-3" src="{{ practice.logo }}" width="72" height="72" alt="">
+                        <h3>{{ practice.title }}</h3>
+                        <h4>{{ practice.company }}</h4>
+                        <h5>{{ practice.postDate }}</h5>
+                        <span class="badge rounded-pill text-bg-success">Активная вакансия</span>
+                        <p><b>Описание:</b> {{ practice.description }}</p>
+                        <a href="{{ practice.linkCompany }}" target="_blank" class="btn btn-success">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="not-active-jobs">
+                <h2 class="mb-4">В архиве</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <img class="mb-3" src="{{ practice.logo }}" width="72" height="72" alt="">
+                        <h3>{{ practice.title }}</h3>
+                        <h4>{{ practice.company }}</h4>
+                        <h5>{{ practice.postDate }}</h5>
+                        <span class="badge rounded-pill text-bg-danger">В архиве</span>
+                        <p><b>Описание:</b> {{ practice.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
